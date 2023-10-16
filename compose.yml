@@ -11,13 +11,15 @@ services:
             - $PWD/traefik/traefik.yml:/etc/traefik/traefik.yml
             - /var/run/docker.sock:/var/run/docker.sock
         restart: unless-stopped
+        networks:
+            - traefik
         ports:
-            - "8080:8080"
+            - "$TRAEFIK_UI_PORT:8080"
             - "80:80"
         labels:
             - traefik.enable=true
             - traefik.http.routers.traefik.entrypoints=http
-            - traefik.http.services.traefik.loadbalancer.server.port=8080
+            - traefik.http.services.traefik.loadbalancer.server.port=$TRAEFIK_UI_PORT
     
     mailpit:
         container_name: mailpit
@@ -28,4 +30,5 @@ services:
         labels:
             - traefik.enable=true
             - traefik.http.routers.mailpit.entrypoints=http
-            - traefik.http.services.mailpit.loadbalancer.server.port=8025
+            - traefik.http.services.mailpit.loadbalancer.server.port=$MAILPIT_HTTP_PORT
+
