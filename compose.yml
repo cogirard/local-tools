@@ -1,0 +1,31 @@
+networks:
+    traefik:
+        external: true
+        name: traefik-network
+
+services:
+    traefik:
+        container_name: traefik
+        image: traefik:v2.10.5
+        volumes:
+            - $PWD/traefik/traefik.yml:/etc/traefik/traefik.yml
+            - /var/run/docker.sock:/var/run/docker.sock
+        restart: unless-stopped
+        ports:
+            - "8080:8080"
+            - "80:80"
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.traefik.entrypoints=http
+            - traefik.http.services.traefik.loadbalancer.server.port=8080
+    
+    mailpit:
+        container_name: mailpit
+        image: axllent/mailpit
+        restart: unless-stopped
+        networks:
+            - traefik
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.mailpit.entrypoints=http
+            - traefik.http.services.mailpit.loadbalancer.server.port=8025

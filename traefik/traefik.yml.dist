@@ -1,0 +1,11 @@
+providers:
+    docker:
+        defaultRule: "Host(`{{ .ContainerName }}.docker`)"
+        network: traefik-network
+
+api:
+    insecure: true
+
+entryPoints:
+    http:
+        address: ":80"
