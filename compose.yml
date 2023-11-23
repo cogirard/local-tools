@@ -31,4 +31,3 @@ services:
             - traefik.enable=true
             - traefik.http.routers.mailpit.entrypoints=http
             - traefik.http.services.mailpit.loadbalancer.server.port=$MAILPIT_HTTP_PORT
-

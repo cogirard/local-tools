@@ -1,16 +1,23 @@
 include .env
 
-export COMPOSE_PROJECT_NAME
+COMPOSE_FILE ?= compose.yml
+ifneq ("$(wildcard compose.override.yml)","")
+    COMPOSE_FILE := compose.yml:compose.override.yml
+endif
 
-up:
-	docker compose up -d
+DOCKER_COMPOSE := COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker compose
 
-down: 
-	docker compose down
+export COMPOSE_FILE COMPOSE_PROJECT_NAME
 
-restart:
-	docker compose restart
+up: # starts containers
+	$(DOCKER_COMPOSE) up -d
 
-full-restart:
+down: # stops and remove containers
+	$(DOCKER_COMPOSE) down
+
+restart: # restarts containers
+	$(DOCKER_COMPOSE) restart
+
+full-restart: # command down then up
 	$(MAKE) down
 	$(MAKE) up
