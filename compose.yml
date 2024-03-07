@@ -6,7 +6,7 @@ networks:
 services:
     traefik:
         container_name: traefik
-        image: traefik:v2.10.5
+        image: traefik:v3.0
         volumes:
             - $PWD/traefik/traefik.yml:/etc/traefik/traefik.yml
             - /var/run/docker.sock:/var/run/docker.sock
@@ -30,4 +30,4 @@ services:
         labels:
             - traefik.enable=true
             - traefik.http.routers.mailpit.entrypoints=http
-            - traefik.http.services.mailpit.loadbalancer.server.port=$MAILPIT_HTTP_PORT
+            - traefik.http.services.mailpit.loadbalancer.server.port=$MAILPIT_UI_PORT
