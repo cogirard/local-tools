@@ -6,7 +6,7 @@ networks:
 services:
     traefik:
         container_name: traefik
-        image: traefik:v3.0
+        image: traefik:latest
         volumes:
             - $PWD/traefik/traefik.yml:/etc/traefik/traefik.yml
             - /var/run/docker.sock:/var/run/docker.sock
