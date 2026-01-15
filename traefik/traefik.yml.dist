@@ -1,6 +1,6 @@
 providers:
     docker:
-        defaultRule: "Host(`{{ .ContainerName }}.docker`)"
+        defaultRule: "Host(`{{ .ContainerName }}.localhost`)"
         network: traefik-network
 
 api:
