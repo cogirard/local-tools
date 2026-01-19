@@ -2,11 +2,14 @@ networks:
     traefik:
         external: true
         name: traefik-network
+    mailpit:
+        external: true
+        name: mailpit-network
 
 services:
     traefik:
         container_name: traefik
-        image: traefik:latest
+        image: traefik:3.6.7
         volumes:
             - $PWD/traefik/traefik.yml:/etc/traefik/traefik.yml
             - /var/run/docker.sock:/var/run/docker.sock
@@ -27,6 +30,7 @@ services:
         restart: unless-stopped
         networks:
             - traefik
+            - mailpit
         labels:
             - traefik.enable=true
             - traefik.http.routers.mailpit.entrypoints=http

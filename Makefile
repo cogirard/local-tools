@@ -9,7 +9,7 @@ DOCKER_COMPOSE := COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker compose
 
 export COMPOSE_FILE COMPOSE_PROJECT_NAME SERVER_NAME TRAEFIK_UI_PORT MAILPIT_UI_PORT
 
-up: # starts containers
+up: networks # starts containers
 	$(DOCKER_COMPOSE) up -d
 
 down: # stops and remove containers
@@ -21,6 +21,10 @@ restart: # restarts containers
 build: # build des images du projet
 	$(eval service :=)
 	$(DOCKER_COMPOSE) build --no-cache $(service)
+
+networks: # créer les réseaux nécessaires pour les containers
+	@docker network inspect traefik-network >/dev/null 2>&1 || docker network create traefik-network
+	@docker network inspect mailpit-network >/dev/null 2>&1 || docker network create mailpit-network
 
 full-restart: # command down then up
 	$(MAKE) down
