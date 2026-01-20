@@ -19,7 +19,7 @@ Mailpit est un outil permettant de tester l'envoi de mails en les interceptant g
    1. La variable `COMPOSE_PROJECT_NAME` définit le nom du projet pour docker.
    2. La variable `TRAEFIK_UI_PORT` définit quel port local sera utilisé pour accéder à l'interface de traefik. À NOTER : Cette variable ne sert que pour faire la redirection de port dans les labels traefik.
    3. La variable `MAILPIT_HTTP_PORT` définit quel port local sera utilisé pour accéder à l'interface de mailpit. À NOTER : Cette variable ne sert que pour faire la redirection de port dans les labels traefik.
-4. Exécuter la commande `make up` pour build les images du projet et monter les containers.
+4. Exécuter la commande `make up` pour pull les images utilisées par le projet, créer les réseaux et monter les containers.
 
 ## Utilisation
 
