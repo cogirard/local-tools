@@ -15,7 +15,6 @@ Mailpit est un outil permettant de tester l'envoi de mails en les interceptant g
 2. Créer le fichier `traefik/traefik.yml` à partir du fichier `traefik/traefik.yml.dist`
    1. L'entrée `providers.docker.defaultRule` définit le pattern du nom de domaine utilisé par tous les containers configurés pour utiliser `traefik`. Par défaut, ce pattern utilise le TLD `.localhost`.
       1. Utiliser le TLD `.localhost` permet d'accéder à tous les containers sans modifier le fichier `/etc/hosts`. Par défaut, les navigateurs résolvent les domaines ayant le TLD `.localhost` vers `127.0.0.1`
-   2. L'entrée `providers.docker.network` indique le réseau docker utilisé par `traefik`. Il est nécessaire de le créer avant de up le container `traefik` : `docker network create traefik-network`
 3. Créer le fichier `.env` à partir du fichier `.env.dist`.
    1. La variable `COMPOSE_PROJECT_NAME` définit le nom du projet pour docker.
    2. La variable `TRAEFIK_UI_PORT` définit quel port local sera utilisé pour accéder à l'interface de traefik. À NOTER : Cette variable ne sert que pour faire la redirection de port dans les labels traefik.
@@ -40,7 +39,7 @@ services:
             - traefik
 ```
 
-Ensuite, il faut configurer les labels pour ces containers. Avec une configuration basique (accès via le port 80 avec le domaine en TLD `.localhost`), seulement 2 labels sont requis : 
+Ensuite, il faut configurer les labels pour ces containers. Avec une configuration basique (càd accès via le port 80 avec le domaine en TLD `.localhost`), seulement 2 labels sont requis : 
 
 ```yaml
 networks:
