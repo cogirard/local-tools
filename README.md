@@ -73,7 +73,7 @@ services:
             - mailpit
 ```
 
-Exemple avec la variable `MAILER_DSN` d'un projet php utilisant le composant symfony/mailer : `MAILER_DN=smtp://mailpit:1025`
+Exemple avec la variable `MAILER_DSN` d'un projet php utilisant le composant symfony/mailer : `MAILER_DSN=smtp://mailpit:1025`
 
 ## Exemple d'utilisation
 
